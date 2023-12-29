@@ -1,0 +1,21 @@
+.Searchbar-space {
+    flex-grow: 4;
+    margin: auto;
+}
+
+.Searchbar {
+    min-width: 25px;
+    width: 90%;
+    padding: 1em 1em 1em 1em;
+    border-radius: 10px;
+}
+
+.icon-enabled {
+    position: absolute;
+    color: #474747;
+    padding: 0.5em 0 0 0.5em;
+}
+
+.icon-disabled {
+    display: none;
+}

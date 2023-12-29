@@ -1,0 +1,52 @@
+.Header {
+    width: 100%;
+    display: flex;
+    background-color: #EFEFEF;
+}
+
+.Nav {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 20%;
+    min-width: 20em;
+}
+
+.Logo {
+    display: inline;
+    margin-left: 2vw;
+    font-weight: lighter;
+}
+
+.tabName {
+    margin: auto;
+    font-size: larger;
+    flex: 1;
+}
+
+.Menu {
+    min-width: 10em;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-evenly;
+}
+
+.Header-button {
+    border: none;
+    margin: auto;
+    color: #474747
+}
+
+button {
+    flex: 1;
+    border: none;
+    background-color: #efefef;
+    transition: background-color 250ms ease-in-out;
+}
+
+button:hover {
+    background-color: #d9d9d9;
+    transition: background-color 250ms ease-in-out;
+}
