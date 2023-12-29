@@ -1,0 +1,5 @@
+Packages we need to install 
+npm install bcryptjs dotenv express express-async-handler jsonwebtoken mongoose nodemon
+
+To use nodemon just text on terminal
+npm run server
