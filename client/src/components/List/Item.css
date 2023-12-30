@@ -6,11 +6,15 @@
     border-radius: 10px;
     box-shadow: 0px 0px 4px 0px #494949;
     transition: max-height 300ms;
+    padding: 0.5em 0.5em;
 }
 
 .Item.expanded {
     max-height: 100%;
     transition: max-height 300ms;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 .Item-header {
@@ -56,13 +60,22 @@
     max-width: 10em;
 }
 
-.Item-description {
+.Details {
     overflow: hidden;
     max-height: 0;
     transition: max-height 300ms 0ms;
+    display: flex;
 }
 
 .description {
     display: flex;
     justify-content: center;
+}
+
+
+.Item-image-expanded {
+    margin: auto 1em;
+    border: solid 1px;
+    border-color: #494949;
+    border-radius: 10px;
 }

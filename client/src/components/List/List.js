@@ -6,7 +6,7 @@ export default function List({ items }) {
     return (
         <div>
             <ul className='List'>
-                {items.map((item) => <Item product={item}/>)}
+                {items.map((item, index) => <Item product={item} key={index}/>)}
             </ul>
         </div>
     )

@@ -5,11 +5,11 @@ import './Item.css'
 export default function Item({ product }) {
     const [isExpanded, setIsExpanded] = React.useState(false)
     const toggleIsExpanded = () => { setIsExpanded(!isExpanded) }
-    const descriptionRef = React.useRef(null)
+    const detailsRef = React.useRef(null)
 
     React.useEffect(() => {
-        if (descriptionRef.current) {
-            descriptionRef.current.style.maxHeight = isExpanded ? `${descriptionRef.current.scrollHeight}px` : '0'
+        if (detailsRef.current) {
+            detailsRef.current.style.maxHeight = isExpanded ? `${detailsRef.current.scrollHeight}px` : '0'
         }
     }, [isExpanded, product.description])
 
@@ -27,8 +27,9 @@ export default function Item({ product }) {
                 <p className="Item-price">{"$" + product.price.toString()}</p>
                 <Button onClick={buttonOnClick} className="Item-button" content={buttonContent} />
             </div>
-            <div className="description">
-                <p ref={descriptionRef} className="Item-description">{product.description}</p>
+            <div ref={detailsRef} className="Details">
+                <img src={product.image} alt={"Image of " + product.name} className="Item-image-expanded" />
+                <p  className="Item-description">{product.description}</p>
             </div>
         </div>
     )
