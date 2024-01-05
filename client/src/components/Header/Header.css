@@ -34,20 +34,24 @@
     justify-content: space-evenly;
 }
 
-.Header-button {
+.Header-button-icon {
     border: none;
     margin: auto;
     color: #474747
 }
 
-button {
+.Header-button {
     flex: 1;
     border: none;
     background-color: #efefef;
     transition: background-color 250ms ease-in-out;
 }
 
-button:hover {
+.Header-button:hover {
     background-color: #d9d9d9;
     transition: background-color 250ms ease-in-out;
+}
+
+.Header-button.clicked {
+    animation: clickAnimation 0.2s ease;
 }

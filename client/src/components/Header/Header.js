@@ -4,10 +4,10 @@ import Button from '../Common/Button'
 import Icon from '../Common/Icon'
 import './Header.css'
 
-export default function Header({ tab }) {
-    const cartButtonContent = <Icon iconName="shopping_cart" className="Header-button"/>
-    const cartButtonOnClick = () => { /* TODO */ }
-    const userButtonContent = <Icon iconName="person" className="Header-button"/>
+export default function Header({ tab, cartButtonOnClick, homeButtonOnClick }) {
+    const homeButtonContent = <Icon iconName="home" className="Header-button-icon"/>
+    const cartButtonContent = <Icon iconName="shopping_cart" className="Header-button-icon"/>
+    const userButtonContent = <Icon iconName="person" className="Header-button-icon"/>
     const userButtonOnClick = () => { /* TODO */ }
 
     return (
@@ -20,8 +20,9 @@ export default function Header({ tab }) {
             </div>
             <Searchbar/>
             <div className="Menu">
-                <Button onClick={cartButtonOnClick} content={cartButtonContent} />
-                <Button onClick={userButtonOnClick} content={userButtonContent} />
+                <Button onClick={homeButtonOnClick} content={homeButtonContent} className="Header-button"/>
+                <Button onClick={cartButtonOnClick} content={cartButtonContent} className="Header-button"/>
+                <Button onClick={userButtonOnClick} content={userButtonContent} className="Header-button"/>
             </div>
         </div>
     )
