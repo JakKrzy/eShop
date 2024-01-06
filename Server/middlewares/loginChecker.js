@@ -14,37 +14,36 @@ const User = require('../models/user');
 
 
 const loginChecker = asyncHandler(async (req, res, next) => {
-    
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith("Bearer")
-    ){
-        let token = req.headers.authorization.split(' ')[1];
-        if (token) {
-            jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-                if (error){
-                    res.status(401).json({
-                        status: 'fail',
-                        message: 'Unauthorized Request 0',
-                    });
-                } else {
-                    req.user = decoded
-                    next()
-                }
-            })
-        } else {
+    if (!req.headers.authorization || !req.headers.authorization.startsWith("Bearer")) {
+        res.status(401).json({
+            status: 'fail',
+            message: 'Unauthorized Request 0',
+        });
+        return;
+    }
+
+    const token = req.headers.authorization.split(' ')[1];
+
+    if (!token) {
+        res.status(401).json({
+            status: 'fail',
+            message: 'Unauthorized Request 1',
+        });
+        return;
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+        if (error) {
             res.status(401).json({
                 status: 'fail',
-                message: 'Unauthorized Request 1 ',
+                message: 'Unauthorized Request 2',
             });
+        } else {
+            req.user = decoded;
+            next();
         }
-  } else {
-    res.status(401).json({
-        status: 'fail',
-        message: 'Unauthorized Request 2',
     });
-    }
-}); 
+});
 
 
 module.exports = {loginChecker};
