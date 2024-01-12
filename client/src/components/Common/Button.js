@@ -1,7 +1,7 @@
 import React from 'react'
 import './Button.css'
 
-export default function Button({ onClick, content, className }) {
+export default function Button({ onClick, content, className, type='' }) {
     const [isClicked, setIsClicked] = React.useState(false)
     const handleClick = () => {
         onClick()
@@ -12,7 +12,9 @@ export default function Button({ onClick, content, className }) {
     }
 
     return (
-        <button onClick={handleClick} className={className + (isClicked ? " clicked" : "")}>
+        <button onClick={handleClick}
+                className={className + (isClicked ? " clicked" : "")}
+                type={type}>
             {content}
         </button>
     )
