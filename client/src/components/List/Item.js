@@ -34,14 +34,14 @@ export default function Item({
     }
 
     const modifyButton = 
-        modifyButtonOnClick != undefined
+        modifyButtonOnClick !== undefined
         ? <Button onClick={() => modifyButtonOnClick(product._id)} className="Item-button modifyButton" content="Modify" />
-        : <></>
+        : null
 
     const deleteButton = 
         displayDeleteButton
         ? <Button onClick={deleteProduct} className={"Item-button deleteButton"} content="Delete" />
-        : <></>
+        : null
 
     return (
         <div className={"Item " + (isExpanded ? "expanded" : "collapsed")}>

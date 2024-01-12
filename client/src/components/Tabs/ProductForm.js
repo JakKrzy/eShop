@@ -28,11 +28,11 @@ export default function ProductForm({ productId, finisher }) {
                 console.error('Error fetching product details:', error.message)
             }
         }
-        if (productId != undefined)
+        if (productId !== undefined)
             fetchProductDetails()
     }, [productId])
 
-    const formHeader = productId != undefined ? 'Modify product' : 'Add a new product'
+    const formHeader = productId !== undefined ? 'Modify product' : 'Add a new product'
 
     const handleInputChange = (e) => {
         setFormData({
@@ -89,7 +89,7 @@ export default function ProductForm({ productId, finisher }) {
             }
         }
 
-        if (productId != undefined)
+        if (productId !== undefined)
             submitModifiedProduct()
         else
             submitNewProduct()

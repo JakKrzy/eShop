@@ -39,7 +39,7 @@ export default function App() {
 		appTab = <h1>ERROR 404</h1>
 
 	React.useEffect(() => {
-		if (tab != "ProductForm")
+		if (tab !== "ProductForm")
 			setModifyProductId(undefined)
 	}, [tab])
 
