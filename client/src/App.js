@@ -2,17 +2,19 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Catalogue from './components/Tabs/Catalogue'
 import Cart from './components/Tabs/Cart'
+import ProductForm from './components/Tabs/ProductForm';
 import './App.css';
 
 export default function App() {
 	const [tab, setTab] = React.useState("Home")
+	const [modifyProductId, setModifyProductId] = React.useState(undefined)
 	const cartButtonOnClick = () => { setTab("Cart") }
-	const homeButtonOnClick = () => { setTab("Home")}
-	
+	const homeButtonOnClick = () => { setTab("Home") }
+	const addButtonOnClick = () => { setTab("ProductForm") }
+
 	const [cartItems, setCartItems] = React.useState([])
-	const addToCart = (product) => { 
+	const addToCart = (product) => {
 		setCartItems([...cartItems, product])
-		console.log(cartItems)
 	}
 
 	const deleteFromCart = (index) => {
@@ -21,17 +23,35 @@ export default function App() {
 		setCartItems(updatedCart)
 	}
 
-	const appTab = 
-		tab === "Home"
-		? <Catalogue onAddToCart={addToCart} />
-		: tab === "Cart"
-		  ? <Cart cartItems={cartItems} onDeleteFromCart={deleteFromCart}/>
-		  : <h1>ERROR 404</h1>
+	const onModifyProduct = (productId) => {
+		setModifyProductId(productId)
+		setTab("ProductForm")
+	}
 
-    return (
+	var appTab
+	if (tab === "Home")
+		appTab = <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct}/>
+	else if (tab === "Cart")
+		appTab = <Cart cartItems={cartItems} onDeleteFromCart={deleteFromCart} />
+	else if (tab === "ProductForm")
+		appTab = <ProductForm productId={modifyProductId} finisher={() => setModifyProductId(undefined)}/>
+	else
+		appTab = <h1>ERROR 404</h1>
+
+	React.useEffect(() => {
+		if (tab != "ProductForm")
+			setModifyProductId(undefined)
+	}, [tab])
+
+	return (
 		<div className="App">
-         	<Header tab={tab} cartButtonOnClick={cartButtonOnClick} homeButtonOnClick={homeButtonOnClick}/>
+			<Header
+				tab={tab}
+				cartButtonOnClick={cartButtonOnClick}
+				homeButtonOnClick={homeButtonOnClick}
+				addButtonOnClick={addButtonOnClick}
+			/>
 			{appTab}
-       	</div>
-    )
+		</div>
+	)
 }

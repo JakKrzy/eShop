@@ -11,10 +11,10 @@ export default function Cart({ cartItems, onDeleteFromCart }) {
 
     const cartContent =
         <div className="Cart-tab">
-            <List items={cartItems} itemButtonOnClick={onDeleteFromCart} itemButtonArg="index" itemButtonContent="Delete from cart"/>
+            <List items={cartItems} itemButtonOnClick={onDeleteFromCart} itemButtonArg="index" itemButtonContent="Delete from cart" />
             <div className="Order-summary">
-              <h1>{'$' + cartValue.toString()}</h1>
-              <Button content="Order and pay" className="Order-summary-button" onClick={placeOrder} />
+                <h1>{'$' + cartValue.toString()}</h1>
+                <Button content="Order and pay" className="Order-summary-button" onClick={placeOrder} />
             </div>
         </div>
 

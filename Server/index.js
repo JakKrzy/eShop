@@ -1,5 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const usersSeeder = require("./seedDatabase");
+const router = require('./routes/routes');
 
 const app = express();
 app.use(express.json())
@@ -9,7 +13,12 @@ dotenv.config();
 const PORT = process.env.PORT;
 const MONGO = process.env.MONGODB;
 
-const mongoose = require('mongoose');
+const corsOptions = {
+    origin: 'http://localhost:3001', // for testing frontend
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 mongoose.connect(MONGO)
 .then(() => console.log("Succesfully connected to DB"))
@@ -18,9 +27,6 @@ mongoose.connect(MONGO)
 app.get("/", (req, res) =>{
     res.send('App is running');
 })
-
-const usersSeeder = require("./seedDatabase");
-const router = require('./routes/routes');
 
 app.use('/api/seed', usersSeeder);
 app.use('/api', router);

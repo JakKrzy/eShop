@@ -76,6 +76,12 @@
     background-color: #d9d9d9;
 }
 
+.Item-button.deleteButton:hover {
+    transition: background-color 250ms ease-in-out;
+    color: #efefef;
+    background-color: #f23838;
+}
+
 .Item-button.clicked {
     animation: clickAnimation 0.2s ease-in-out;
 }
