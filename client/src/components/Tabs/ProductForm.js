@@ -14,6 +14,7 @@ export default function ProductForm({ productId, finisher }) {
     React.useEffect(() => {
         const fetchProductDetails = async () => {
             try {
+                console.log(productId);
                 const response = 
                     await fetch(`http://localhost:3000/api/products/${productId}`)
 
