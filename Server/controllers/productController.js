@@ -26,7 +26,31 @@ const createProduct = AsyncHandler(async (req, res) => {
 
 const fetchProducts = AsyncHandler(async (req, res) => {
     try {
-        const products = await Product.find()
+        const { name, price, sort, page, pageSize } = req.query
+        const filter = {}
+        if (name) {
+            filter.name = { $regex: new RegExp(name), $options: 'i' }
+        }
+        if (parseInt(price) !== 0) {
+            filter.price = { $lte: parseInt(price) }
+        }
+
+        const sortOpt = {}
+        if (sort) {
+            const [field, order] = sort.split(':')
+            sortOpt[field] = order === 'desc' ? -1 : 1
+        }
+
+        const pageNumber = parseInt(page) || 1
+        const maxItemsPerPage = parseInt(pageSize) || 7
+
+        const skip = (pageNumber - 1) * maxItemsPerPage 
+
+        const products = await Product.find(filter)
+            .sort(sortOpt)
+            .skip(skip)
+            .limit(maxItemsPerPage)
+
         res.status(200).json({
             status: 'success',
             data: products})

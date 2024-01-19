@@ -1,0 +1,40 @@
+.Catalogue {
+    display: flex;
+}
+
+.Page-nav {
+    display: flex;
+    width: 100%;
+    margin: 1em auto;
+    justify-content: center;
+}
+
+.Page-nav-icon {
+    border: none;
+    margin: auto;
+    color: #474747
+}
+
+.Page-number {
+    margin: 0 2em;
+}
+
+.Page-nav-button {
+    flex: 1;
+    border: none;
+    background-color: #efefef;
+    max-width: 5em;
+    box-shadow: 0px 0px 4px 0px #494949;
+    transition: background-color 250ms ease-in-out;
+    border-radius: 10px;
+}
+
+
+.Page-nav-button:hover {
+    background-color: #d9d9d9;
+    transition: background-color 250ms ease-in-out;
+}
+
+.Page-nav-button.clicked {
+    animation: clickAnimation 0.2s ease;
+}
