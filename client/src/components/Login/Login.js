@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import Button from '../Common/Button'
 import "./Login.css";
 
-export default function Login() {
+export default function Login({setToken}) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoginMode, setIsLoginMode] = useState(true); // Flag to toggle between login and registration modes
-    const [token, setToken] = useState(null);
     const [message, setMessage] = useState(null);
 
     const handleSubmit = async (e) => {
@@ -31,18 +31,17 @@ export default function Login() {
             setEmail('');
             setPassword('');
             setName('');
-            console.log(message, userData);
+            console.log(userData);
             const userToken = userData.data.token;
             setToken(userToken);
             // console.log(userToken);
 
         } else {
             setMessage(isLoginMode ? 'Invalid email or password' : 'Account with this email already exists');
-            console.error(message);
         }
     } catch (error) {
         setMessage('Error during sending the request');
-        console.error(message, error);
+        console.log(error);
     }
     };
 
@@ -93,14 +92,17 @@ export default function Login() {
                     className="Login-input"
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <Button 
+                    onClick={() => {}} 
+                    type='submit' 
+                    content={isLoginMode ? 'Log In' : 'Register'} 
+                    className="Login-button"/>
+                <Button 
+                    onClick={handleModeChange} 
+                    type = 'button' 
+                    content={isLoginMode ? 'Create an account' : 'Already have an account? Log in'} 
+                    className="ToggleMode-button"/>
 
-                <button type="submit" className="Login-button">
-                    {isLoginMode ? 'Log In' : 'Register'}
-                </button>
-
-                <button type="button" onClick={handleModeChange} className="ToggleMode-button">
-                    {isLoginMode ? 'Create an account' : 'Already have an account? Log in'}
-                </button>
                 <p>
 
                 </p>

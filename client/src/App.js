@@ -30,6 +30,9 @@ export default function App() {
 		setTab("ProductForm")
 	}
 
+	const [token, setToken] = React.useState(null)
+
+
 	var appTab
 	if (tab === "Home")
 		appTab = <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct}/>
@@ -38,7 +41,7 @@ export default function App() {
 	else if (tab === "ProductForm")
 		appTab = <ProductForm productId={modifyProductId} finisher={() => setModifyProductId(undefined)}/>
 	else if (tab === "Login")
-		appTab = <Login />
+		appTab = <Login setToken={setToken}/>
 	else
 		appTab = <h1>ERROR 404</h1>
 
