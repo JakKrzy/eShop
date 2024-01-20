@@ -59,6 +59,11 @@ export default function App() {
 				cartButtonOnClick={cartButtonOnClick}
 				homeButtonOnClick={homeButtonOnClick}
 				addButtonOnClick={addButtonOnClick}
+				userButtonOnClick={userButtonOnClick}
+				searchProps={{
+					searchText: searchText,
+					setSearchText: setSearchText
+				}}
 			/>
 			{appTab}
 		</div>
