@@ -5,7 +5,7 @@ import Icon from '../Common/Icon'
 import './Header.css'
 
 export default function Header({ 
-    tab, cartButtonOnClick, homeButtonOnClick, addButtonOnClick, userButtonOnClick }) {
+    tab, cartButtonOnClick, homeButtonOnClick, addButtonOnClick }) {
     const homeButtonContent = <Icon iconName="home" className="Header-button-icon"/>
     const cartButtonContent = <Icon iconName="shopping_cart" className="Header-button-icon"/>
     const addButtonContent = <Icon iconName="add" className="Header-button-icon"/>
@@ -19,7 +19,7 @@ export default function Header({
                 </div>
                 <p className="tabName">{tab}</p>
             </div>
-            <Searchbar/>
+            <Searchbar props={searchProps}/>
             <div className="Menu">
                 <Button onClick={addButtonOnClick} content={addButtonContent} className="Header-button"/>
                 <Button onClick={homeButtonOnClick} content={homeButtonContent} className="Header-button"/>

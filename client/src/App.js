@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header/Header';
-import Catalogue from './components/Tabs/Catalogue'
+import Catalogue from './components/Tabs/Catalogue/Catalogue'
 import Cart from './components/Tabs/Cart'
 import ProductForm from './components/Tabs/ProductForm';
 import Login from './components/Login/Login';
@@ -9,6 +9,8 @@ import './App.css';
 export default function App() {
 	const [tab, setTab] = React.useState("Home")
 	const [modifyProductId, setModifyProductId] = React.useState(undefined)
+	const [searchText, setSearchText] = React.useState('')
+
 	const cartButtonOnClick = () => { setTab("Cart") }
 	const homeButtonOnClick = () => { setTab("Home") }
 	const addButtonOnClick = () => { setTab("ProductForm") }
@@ -35,7 +37,7 @@ export default function App() {
 
 	var appTab
 	if (tab === "Home")
-		appTab = <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct}/>
+		appTab = <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct} searchText={searchText} />
 	else if (tab === "Cart")
 		appTab = <Cart cartItems={cartItems} onDeleteFromCart={deleteFromCart} />
 	else if (tab === "ProductForm")
@@ -57,7 +59,6 @@ export default function App() {
 				cartButtonOnClick={cartButtonOnClick}
 				homeButtonOnClick={homeButtonOnClick}
 				addButtonOnClick={addButtonOnClick}
-				userButtonOnClick={userButtonOnClick}
 			/>
 			{appTab}
 		</div>
