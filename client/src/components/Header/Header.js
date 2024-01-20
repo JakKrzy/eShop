@@ -5,12 +5,11 @@ import Icon from '../Common/Icon'
 import './Header.css'
 
 export default function Header({ 
-    tab, cartButtonOnClick, homeButtonOnClick, addButtonOnClick, searchProps }) {
+    tab, cartButtonOnClick, homeButtonOnClick, addButtonOnClick, userButtonOnClick, searchProps }) {
     const homeButtonContent = <Icon iconName="home" className="Header-button-icon"/>
     const cartButtonContent = <Icon iconName="shopping_cart" className="Header-button-icon"/>
     const addButtonContent = <Icon iconName="add" className="Header-button-icon"/>
     const userButtonContent = <Icon iconName="person" className="Header-button-icon"/>
-    const userButtonOnClick = () => { /* TODO */ }
 
     return (
         <div className="Header">
