@@ -4,6 +4,7 @@ import Catalogue from './components/Tabs/Catalogue/Catalogue'
 import Cart from './components/Tabs/Cart'
 import ProductForm from './components/Tabs/ProductForm'
 import Login from './components/Login/Login'
+import OrderList from './components/Tabs/OrderList/OrderList'
 import './App.css'
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
 	const cartButtonOnClick = () => { setTab("Cart") }
 	const homeButtonOnClick = () => { setTab("Home") }
 	const addButtonOnClick = () => { setTab("ProductForm") }
-	const userButtonOnClick= () => { setTab("Login") }
+	const userButtonOnClick = () => { setTab("Login") }
+	const orderListButtonOnClick = () => { setTab("OrderList") }
 
 	const [cartItems, setCartItems] = React.useState([])
 	const addToCart = (product) => {
@@ -33,16 +35,17 @@ export default function App() {
 		setModifyProductId(productId)
 		setTab("ProductForm")
 	}
-
+	
 	const tabs = {
 		"Home": <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct} searchText={searchText} />,
 		"Cart": <Cart cartItems={cartItems} onDeleteFromCart={deleteFromCart} userId={userId} token={token} />,
 		"ProductForm": <ProductForm productId={modifyProductId} finisher={() => setModifyProductId(undefined)} />,
-		"Login": <Login setToken={setToken} setUserId={setUserId} />
+		"Login": <Login setToken={setToken} setUserId={setUserId} />,
+		"OrderList": <OrderList token={token} />
 	}
 	
 	const appTab = tabs[tab]
-
+	
 	React.useEffect(() => {
 		if (tab != "ProductForm")
 			setModifyProductId(undefined)
@@ -56,6 +59,7 @@ export default function App() {
 				homeButtonOnClick={homeButtonOnClick}
 				addButtonOnClick={addButtonOnClick}
 				userButtonOnClick={userButtonOnClick}
+				orderListButtonOnClick={orderListButtonOnClick}
 				searchProps={{
 					searchText: searchText,
 					setSearchText: setSearchText

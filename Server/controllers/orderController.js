@@ -11,7 +11,6 @@ const AsyncHandler = require("express-async-handler");
 
 const createOrder = AsyncHandler(async (req, res) => {
         let orderObj = req.body;
-        console.log(req.body)
         let newOrder = new Order(orderObj);
         let createdOrder = await newOrder.save();
         
@@ -30,8 +29,22 @@ const createOrder = AsyncHandler(async (req, res) => {
  */
 
 const allOrders = AsyncHandler(async (req, res) => {
-    const orders = await Order.find({});
-    res.status(200).json({ status: 'success', data: orders });
+    const { page, pageSize } = req.query;
+
+    const pageNumber = parseInt(page) || 1;
+    const maxItemsPerPage = parseInt(pageSize) || 7;
+    const skip = (pageNumber - 1) * maxItemsPerPage;
+
+    const orders = await Order.find({})
+        .skip(skip)
+        .limit(maxItemsPerPage);
+
+    const count = await Order.countDocuments({});
+    
+    res.status(200).json({ status: 'success', data: {
+        orders: orders,
+        count: count
+    }});
  });
 
 /**

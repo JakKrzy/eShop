@@ -14,7 +14,6 @@ export default function ProductForm({ productId, finisher }) {
     React.useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                console.log(productId);
                 const response = 
                     await fetch(`${process.env.REACT_APP_SERVER_URL}/api/products/${productId}`)
 
@@ -23,7 +22,6 @@ export default function ProductForm({ productId, finisher }) {
                 }
 
                 const existingProduct = await response.json().then((value) => value.data)
-                console.log(existingProduct)
                 setFormData(existingProduct)
             } catch (error) {
                 console.error('Error fetching product details:', error.message)
