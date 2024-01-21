@@ -1,13 +1,15 @@
 import React from 'react'
 import Button from '../Common/Button'
+import AppContext from '../../AppContext'
 import './Item.css'
 
 export default function Item({ 
         product,
         buttonOnClick,
         buttonContent,
-        displayDeleteButton,
         modifyButtonOnClick }) {
+    
+    const {globalState, setGlobalState} = React.useContext(AppContext)
     const [isExpanded, setIsExpanded] = React.useState(false)
     const toggleIsExpanded = () => { setIsExpanded(!isExpanded) }
     const detailsRef = React.useRef(null)
@@ -20,7 +22,7 @@ export default function Item({
 
     const deleteProduct = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/products/${product._id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/products/${product._id}`, {
                 method: 'DELETE'
             })
 
@@ -34,12 +36,12 @@ export default function Item({
     }
 
     const modifyButton = 
-        modifyButtonOnClick != undefined
+        globalState.isAdmin
         ? <Button onClick={() => modifyButtonOnClick(product._id)} className="Item-button modifyButton" content="Modify" />
         : <></>
 
     const deleteButton = 
-        displayDeleteButton
+        globalState.isAdmin
         ? <Button onClick={deleteProduct} className={"Item-button deleteButton"} content="Delete" />
         : <></>
 

@@ -16,7 +16,7 @@ export default function Catalogue({ onAddToCart, modifyProductOnClick, searchTex
 		const fetchProducts = async () => {
 			try {
 				const response = await fetch(
-					'http://localhost:3000/api/products' + 
+					`${process.env.REACT_APP_SERVER_URL}/api/products` + 
 					`?name=${searchText}` +
 					`&price=${maxPrice}` +
 					`&page=${pageNumber}` +
