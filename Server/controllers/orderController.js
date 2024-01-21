@@ -10,7 +10,8 @@ const AsyncHandler = require("express-async-handler");
  */
 
 const createOrder = AsyncHandler(async (req, res) => {
-        let orderObj = { ...req.body, user: req.user._id };
+        let orderObj = req.body;
+        console.log(req.body)
         let newOrder = new Order(orderObj);
         let createdOrder = await newOrder.save();
         

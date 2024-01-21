@@ -1,20 +1,22 @@
-import React from 'react';
-import Header from './components/Header/Header';
+import React from 'react'
+import Header from './components/Header/Header'
 import Catalogue from './components/Tabs/Catalogue/Catalogue'
 import Cart from './components/Tabs/Cart'
-import ProductForm from './components/Tabs/ProductForm';
-import Login from './components/Login/Login';
-import './App.css';
+import ProductForm from './components/Tabs/ProductForm'
+import Login from './components/Login/Login'
+import './App.css'
 
 export default function App() {
 	const [tab, setTab] = React.useState("Home")
 	const [modifyProductId, setModifyProductId] = React.useState(undefined)
 	const [searchText, setSearchText] = React.useState('')
+	const [token, setToken] = React.useState(null)
+	const [userId, setUserId] = React.useState(null)
 
 	const cartButtonOnClick = () => { setTab("Cart") }
 	const homeButtonOnClick = () => { setTab("Home") }
 	const addButtonOnClick = () => { setTab("ProductForm") }
-	const userButtonOnClick= () => {setTab("Login") }
+	const userButtonOnClick= () => { setTab("Login") }
 
 	const [cartItems, setCartItems] = React.useState([])
 	const addToCart = (product) => {
@@ -32,20 +34,14 @@ export default function App() {
 		setTab("ProductForm")
 	}
 
-	const [token, setToken] = React.useState(null)
-
-
-	var appTab
-	if (tab === "Home")
-		appTab = <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct} searchText={searchText} />
-	else if (tab === "Cart")
-		appTab = <Cart cartItems={cartItems} onDeleteFromCart={deleteFromCart} />
-	else if (tab === "ProductForm")
-		appTab = <ProductForm productId={modifyProductId} finisher={() => setModifyProductId(undefined)}/>
-	else if (tab === "Login")
-		appTab = <Login setToken={setToken}/>
-	else
-		appTab = <h1>ERROR 404</h1>
+	const tabs = {
+		"Home": <Catalogue onAddToCart={addToCart} modifyProductOnClick={onModifyProduct} searchText={searchText} />,
+		"Cart": <Cart cartItems={cartItems} onDeleteFromCart={deleteFromCart} userId={userId} token={token} />,
+		"ProductForm": <ProductForm productId={modifyProductId} finisher={() => setModifyProductId(undefined)} />,
+		"Login": <Login setToken={setToken} setUserId={setUserId} />
+	}
+	
+	const appTab = tabs[tab]
 
 	React.useEffect(() => {
 		if (tab != "ProductForm")

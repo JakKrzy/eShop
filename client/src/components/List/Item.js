@@ -20,7 +20,7 @@ export default function Item({
 
     const deleteProduct = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/products/${product._id}`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/products/${product._id}`, {
                 method: 'DELETE'
             })
 

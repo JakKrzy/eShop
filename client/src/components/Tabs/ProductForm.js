@@ -16,7 +16,7 @@ export default function ProductForm({ productId, finisher }) {
             try {
                 console.log(productId);
                 const response = 
-                    await fetch(`http://localhost:3000/api/products/${productId}`)
+                    await fetch(`${process.env.REACT_APP_SERVER_URL}/api/products/${productId}`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Message: ${response.message}`)
@@ -46,7 +46,7 @@ export default function ProductForm({ productId, finisher }) {
         e.preventDefault()
         const submitNewProduct = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/products', {
+                const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/products`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -60,7 +60,6 @@ export default function ProductForm({ productId, finisher }) {
     
                 const respJson = await response.json()
                 const createdProduct = respJson.formData
-                console.log('Product added:', createdProduct)
                 window.location.reload(false)
             } catch (error) {
                 console.error('Error creating product:', error.message)
@@ -69,7 +68,7 @@ export default function ProductForm({ productId, finisher }) {
 
         const submitModifiedProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/products/${productId}`, {
+                const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/products/${productId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
