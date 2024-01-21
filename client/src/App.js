@@ -5,9 +5,12 @@ import Cart from './components/Tabs/Cart'
 import ProductForm from './components/Tabs/ProductForm'
 import Login from './components/Login/Login'
 import OrderList from './components/Tabs/OrderList/OrderList'
+import AppContext from './AppContext'
 import './App.css'
 
 export default function App() {
+	const [globalState, setGlobalState] = React.useState({ isAdmin: false })
+
 	const [tab, setTab] = React.useState("Home")
 	const [modifyProductId, setModifyProductId] = React.useState(undefined)
 	const [searchText, setSearchText] = React.useState('')
@@ -52,6 +55,7 @@ export default function App() {
 	}, [tab])
 
 	return (
+		<AppContext.Provider value={{globalState, setGlobalState}}>
 		<div className="App">
 			<Header
 				tab={tab}
@@ -64,8 +68,9 @@ export default function App() {
 					searchText: searchText,
 					setSearchText: setSearchText
 				}}
-			/>
+				/>
 			{appTab}
 		</div>
+		</AppContext.Provider>
 	)
 }

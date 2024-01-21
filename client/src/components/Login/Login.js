@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Button from '../Common/Button'
+import AppContext from '../../AppContext'
 import "./Login.css";
 
 export default function Login({ setToken, setUserId }) {
+    const {globalState, setGlobalState} = React.useContext(AppContext)
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,7 +36,7 @@ export default function Login({ setToken, setUserId }) {
             const userToken = userData.data.token;
             setToken(userToken);
             setUserId(userData.data._id)
-
+            setGlobalState({ ...globalState, isAdmin: userData.data.isAdmin })
         } else {
             setMessage(isLoginMode ? 'Invalid email or password' : 'Account with this email already exists');
         }
